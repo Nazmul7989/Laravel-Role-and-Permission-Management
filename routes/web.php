@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RoleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/role',[RoleController::class,'index'])->name('role.index');
+Route::get('/role/create',[RoleController::class,'create'])->name('role.create');
+Route::post('/role/store',[RoleController::class,'store'])->name('role.store');
