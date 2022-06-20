@@ -43,6 +43,8 @@
     <!-- modernizr css -->
     <script src="{{ asset('assets/js/vendor/modernizr-2.8.3.min.js') }}"></script>
 
+
+
 </head>
 <body>
 
@@ -356,6 +358,8 @@
     }
     @endif
 </script>
+
+@stack('script')
 
 </body>
 </html>

@@ -23,6 +23,11 @@
                             </div>
 
                             <div class="form-check">
+
+                                <input type="checkbox" id="checkAll" class="form-check-input" >
+                                <label class="form-check-label">All</label>
+
+                                <hr>
                                 @foreach($permissions as $permission)
                                 <input type="checkbox" class="form-check-input" name="permissions[]" id="permission{{$permission->name}}" value="{{ $permission->id }}">
                                 <label class="form-check-label" for="permission{{$permission->id}}">{{ $permission->name }}</label>
@@ -40,4 +45,23 @@
     </div>
 
 
+
+
 @endsection
+
+@push('script')
+
+    <script>
+        $(document).ready(function (){
+            $('#checkAll').click(function (){
+
+                if ($(this).is(':checked')){
+                    $('input[type=checkbox]').prop('checked',true);
+                }else {
+                    $('input[type=checkbox]').prop('checked',false);
+                }
+            })
+        })
+    </script>
+
+@endpush
