@@ -27,6 +27,20 @@ class PermissionSeeder extends Seeder
             //dashboard
             ['name'=>'dashboard_view','guard_name'=>'web','group_name' => 'dashboard'],
 
+            //user
+            ['name'=>'user_view','guard_name'=>'web','group_name' => 'user'],
+            ['name'=>'user_create','guard_name'=>'web','group_name' => 'user'],
+            ['name'=>'user_edit','guard_name'=>'web','group_name' => 'user'],
+            ['name'=>'user_update','guard_name'=>'web','group_name' => 'user'],
+            ['name'=>'user_delete','guard_name'=>'web','group_name' => 'user'],
+
+            //category
+            ['name'=>'category_view','guard_name'=>'web','group_name' => 'category'],
+            ['name'=>'category_create','guard_name'=>'web','group_name' => 'category'],
+            ['name'=>'category_edit','guard_name'=>'web','group_name' => 'category'],
+            ['name'=>'category_update','guard_name'=>'web','group_name' => 'category'],
+            ['name'=>'category_delete','guard_name'=>'web','group_name' => 'category'],
+
             //blog
             ['name'=>'blog_view','guard_name'=>'web','group_name' => 'blog'],
             ['name'=>'blog_create','guard_name'=>'web','group_name' => 'blog'],

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -18,8 +19,9 @@ class RoleController extends Controller
 
     public function create()
     {
-        $permissions = Permission::all();
-        return view('pages.role.create',compact('permissions'));
+        $all_permissions = Permission::all();
+        $permission_groups = User::getPermissionGroups();
+        return view('pages.role.create',compact('all_permissions','permission_groups'));
     }
 
     public function store(Request $request)
