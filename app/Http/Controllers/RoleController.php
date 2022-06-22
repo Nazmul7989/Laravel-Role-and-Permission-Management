@@ -11,12 +11,14 @@ use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
+    //Role View
     public function index()
     {
         $roles = Role::all();
         return view('pages.role.index',compact('roles'));
     }
 
+    //Role Create
     public function create()
     {
         $all_permissions = Permission::all();
@@ -24,6 +26,7 @@ class RoleController extends Controller
         return view('pages.role.create',compact('all_permissions','permission_groups'));
     }
 
+    //Role Store
     public function store(Request $request)
     {
         $rules = [
@@ -79,4 +82,23 @@ class RoleController extends Controller
 
 
     }
+
+    //Role edit
+    public function edit($id)
+    {
+        $role = Role::findOrFail($id);
+        $all_permissions = Permission::all();
+        $permission_groups = User::getPermissionGroups();
+        return view('pages.role.edit',compact('role','all_permissions','permission_groups'));
+    }
+
+    //Update Role
+    public function update(Request $request,$id)
+    {
+        return $id;
+    }
+
+
+
+
 }

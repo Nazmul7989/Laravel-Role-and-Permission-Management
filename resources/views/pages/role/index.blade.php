@@ -30,7 +30,7 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $role->name }}</td>
                                     <td>
-                                        <button class="btn btn-success btn-sm">Edit</button>
+                                        <a href="{{ route('role.edit',$role->id) }}" class="btn btn-success btn-sm">Edit</a>
                                         <button class="btn btn-danger btn-sm">Delete</button>
                                     </td>
                                 </tr>

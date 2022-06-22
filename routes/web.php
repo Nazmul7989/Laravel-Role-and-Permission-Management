@@ -25,3 +25,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/role',[RoleController::class,'index'])->name('role.index');
 Route::get('/role/create',[RoleController::class,'create'])->name('role.create');
 Route::post('/role/store',[RoleController::class,'store'])->name('role.store');
+Route::get('/role/edit/{id}',[RoleController::class,'edit'])->name('role.edit');
+Route::post('/role/update/{id}',[RoleController::class,'update'])->name('role.update');

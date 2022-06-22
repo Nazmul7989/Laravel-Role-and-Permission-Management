@@ -10,16 +10,16 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="clearfix">
-                            <h4 class="header-title float-left">Create Role</h4>
+                            <h4 class="header-title float-left">Edit Role</h4>
                             <a href="{{ route('role.index') }}" class="btn btn-success btn-sm float-right">Back to Role</a>
                         </div>
                         <hr>
-                        <form action="{{ route('role.store') }}" method="post">
+                        <form action="{{ route('role.update',$role->id) }}" method="post">
                             @csrf
 
                             <div class="form-group">
                                 <label for="name">Role Name</label>
-                                <input type="text" class="form-control" name="name" id="name" placeholder="Enter Role Name">
+                                <input type="text" class="form-control" name="name" value="{{ $role->name }}" id="name" placeholder="Enter Role Name">
                             </div>
 
                             <div class="form-group">
@@ -64,7 +64,7 @@
                             </div>
 
 
-                            <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">Save</button>
+                            <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">Update</button>
                         </form>
                     </div>
                 </div>
@@ -102,27 +102,27 @@
             }
             implementAllChecked();
         }
-            function checkSinglePermission(groupClassName, groupID, countTotalPermission) {
-                const classCheckbox = $('.'+groupClassName+ ' input');
-                const groupIDCheckBox = $("#"+groupID);
-                // if there is any occurance where something is not selected then make selected = false
-                if($('.'+groupClassName+ ' input:checked').length == countTotalPermission){
-                    groupIDCheckBox.prop('checked', true);
-                }else{
-                    groupIDCheckBox.prop('checked', false);
-                }
-                implementAllChecked();
+        function checkSinglePermission(groupClassName, groupID, countTotalPermission) {
+            const classCheckbox = $('.'+groupClassName+ ' input');
+            const groupIDCheckBox = $("#"+groupID);
+            // if there is any occurance where something is not selected then make selected = false
+            if($('.'+groupClassName+ ' input:checked').length == countTotalPermission){
+                groupIDCheckBox.prop('checked', true);
+            }else{
+                groupIDCheckBox.prop('checked', false);
             }
-            function implementAllChecked() {
-                const countPermissions = {{ $all_permissions != null ? count($all_permissions) : 0 }};
-                const countPermissionGroups = {{ $permission_groups != null ? count($permission_groups) : 0 }};
+            implementAllChecked();
+        }
+        function implementAllChecked() {
+            const countPermissions = {{ $all_permissions != null ? count($all_permissions) : 0 }};
+            const countPermissionGroups = {{ $permission_groups != null ? count($permission_groups) : 0 }};
 
-                if($('input[type="checkbox"]:checked').length >= (countPermissions + countPermissionGroups)){
-                    $("#checkPermissionAll").prop('checked', true);
-                }else{
-                    $("#checkPermissionAll").prop('checked', false);
-                }
+            if($('input[type="checkbox"]:checked').length >= (countPermissions + countPermissionGroups)){
+                $("#checkPermissionAll").prop('checked', true);
+            }else{
+                $("#checkPermissionAll").prop('checked', false);
             }
+        }
 
 
 
