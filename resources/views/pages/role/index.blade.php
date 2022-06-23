@@ -20,7 +20,8 @@
                                 <thead class="text-capitalize">
                                 <tr>
                                     <th>Id</th>
-                                    <th>Name</th>
+                                    <th style="width: 150px;">Name</th>
+                                    <th>Permissions</th>
                                     <th style="width: 150px;">Action</th>
                                 </tr>
                                 </thead>
@@ -29,6 +30,11 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $role->name }}</td>
+                                    <td>
+                                        @foreach($role->permissions as $permission)
+                                            <span class="badge badge-primary">{{ $permission->name }}</span>
+                                        @endforeach
+                                    </td>
                                     <td>
                                         <a href="{{ route('role.edit',$role->id) }}" class="btn btn-success btn-sm">Edit</a>
                                         <button class="btn btn-danger btn-sm">Delete</button>
