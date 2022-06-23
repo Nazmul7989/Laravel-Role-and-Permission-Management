@@ -26,8 +26,8 @@
                                 <label for="name">Permissions</label>
 
                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="checkAll" value="1">
-                                    <label class="form-check-label" for="checkAll">All</label>
+                                    <input type="checkbox" class="form-check-input" id="checkPermissionAll" value="1">
+                                    <label class="form-check-label" for="checkPermissionAll">All</label>
                                 </div>
                                 <hr>
                                 @php $i = 1; @endphp
@@ -47,7 +47,7 @@
                                             @endphp
                                             @foreach ($permissions as $permission)
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" name="permissions[]" id="checkPermission{{ $permission->id }}" value="{{ $permission->name }}">
+                                                    <input type="checkbox" class="form-check-input" name="permissions[]" onclick="checkSinglePermission('role-{{ $i }}-management-checkbox', '{{ $i }}Management', {{ count($permissions) }})" id="checkPermission{{ $permission->id }}" value="{{ $permission->name }}">
                                                     <label class="form-check-label" for="checkPermission{{ $permission->id }}">{{ $permission->name }}</label>
                                                 </div>
                                                 @php  $j++; @endphp
@@ -80,52 +80,5 @@
 @endsection
 
 @push('script')
-
-    <script>
-
-        $('#checkAll').click(function (){
-
-            if ($(this).is(':checked')){
-                $('input[type=checkbox]').prop('checked',true);
-            }else {
-                $('input[type=checkbox]').prop('checked',false);
-            }
-        })
-
-        function checkPermissionByGroup(className, checkThis){
-            const groupIdName = $("#"+checkThis.id);
-            const classCheckBox = $('.'+className+' input');
-            if(groupIdName.is(':checked')){
-                classCheckBox.prop('checked', true);
-            }else{
-                classCheckBox.prop('checked', false);
-            }
-            implementAllChecked();
-        }
-            function checkSinglePermission(groupClassName, groupID, countTotalPermission) {
-                const classCheckbox = $('.'+groupClassName+ ' input');
-                const groupIDCheckBox = $("#"+groupID);
-                // if there is any occurance where something is not selected then make selected = false
-                if($('.'+groupClassName+ ' input:checked').length == countTotalPermission){
-                    groupIDCheckBox.prop('checked', true);
-                }else{
-                    groupIDCheckBox.prop('checked', false);
-                }
-                implementAllChecked();
-            }
-            function implementAllChecked() {
-                const countPermissions = {{ $all_permissions != null ? count($all_permissions) : 0 }};
-                const countPermissionGroups = {{ $permission_groups != null ? count($permission_groups) : 0 }};
-
-                if($('input[type="checkbox"]:checked').length >= (countPermissions + countPermissionGroups)){
-                    $("#checkPermissionAll").prop('checked', true);
-                }else{
-                    $("#checkPermissionAll").prop('checked', false);
-                }
-            }
-
-
-
-    </script>
-
+    @include('pages.role.partials.script')
 @endpush

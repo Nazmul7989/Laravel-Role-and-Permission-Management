@@ -30,7 +30,7 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'name'             => "required",
+            'name'             => "required:unique:role,name",
         ];
 
         $validator = Validator::make($request->all(),$rules);
@@ -75,9 +75,6 @@ class RoleController extends Controller
                 return redirect()->back()->with($notification);
 
             }
-
-
-
         }
 
 
@@ -95,7 +92,53 @@ class RoleController extends Controller
     //Update Role
     public function update(Request $request,$id)
     {
-        return $id;
+        $rules = [
+            'name'             => "required:unique:role,name,".$id,
+        ];
+
+        $validator = Validator::make($request->all(),$rules);
+
+        if ($validator->fails()) {
+            $notification = array(
+                'message'    => 'Opps! Please fill out the required field of the Form.',
+                'alert-type' => 'error'
+            );
+            return redirect()->back()->withErrors($validator)->withInput()->with($notification);
+        }else {
+
+            try {
+                DB::beginTransaction();
+
+                $role =Role::findById($id);
+                $role->name = $request->name;
+                $role->save();
+
+                $permissions = $request->permissions;
+
+                if (!empty($permissions)) {
+                    $role->syncPermissions($permissions);
+                }
+
+
+                DB::commit();
+
+                $notification = array(
+                    'message'    => 'Role and Permission Updated Successfully.',
+                    'alert-type' => 'success'
+                );
+                return redirect()->route('role.index')->with($notification);
+
+            }catch (\Exception $exception){
+                DB::rollBack();
+
+                $notification = array(
+                    'message'    => $exception->getMessage(),
+                    'alert-type' => 'error'
+                );
+                return redirect()->back()->with($notification);
+
+            }
+        }
     }
 
 
