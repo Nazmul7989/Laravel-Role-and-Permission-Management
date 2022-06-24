@@ -142,6 +142,21 @@ class RoleController extends Controller
     }
 
 
+    //Role Delete
+    public function destroy($id)
+    {
+        $role =Role::findOrFail($id);
+        $role->delete();
+
+        $notification = array(
+            'message'    => 'Role and Permission Deleted Successfully.',
+            'alert-type' => 'success'
+        );
+        return redirect()->back()->with($notification);
+
+    }
+
+
 
 
 }

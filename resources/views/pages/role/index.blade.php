@@ -37,7 +37,7 @@
                                     </td>
                                     <td>
                                         <a href="{{ route('role.edit',$role->id) }}" class="btn btn-success btn-sm">Edit</a>
-                                        <button class="btn btn-danger btn-sm">Delete</button>
+                                        <a href="{{ route('role.delete',$role->id) }}" onclick="return confirm('Do you want to delete?')" class="btn btn-danger btn-sm">Delete</a>
                                     </td>
                                 </tr>
                                @endforeach
