@@ -20,6 +20,7 @@
                             <div class="form-group">
                                 <label for="name">Role Name</label>
                                 <input type="text" class="form-control" name="name" value="{{ $role->name }}" id="name" placeholder="Enter Role Name">
+                                <div style='color:red; padding: 0 5px;'>{{($errors->has('name'))?($errors->first('name')):''}}</div>
                             </div>
 
                             <div class="form-group">

@@ -2,7 +2,7 @@
 <div class="sidebar-menu">
     <div class="sidebar-header">
         <div class="logo">
-            <a href="index.html"><img src="{{ asset('assets/images/icon/logo.png') }}" alt="logo"></a>
+            <a href="{{ route('home') }}"><img src="{{ asset('assets/images/icon/logo.png') }}" alt="logo"></a>
         </div>
     </div>
     <div class="main-menu">
@@ -13,7 +13,10 @@
                         <a href="{{ route('home') }}" aria-expanded="true"><i class="ti-dashboard"></i><span>dashboard</span></a>
                     </li>
                     <li>
-                        <a href="{{ route('role.index') }}" aria-expanded="true"><i class="ti-dashboard"></i><span>Role</span></a>
+                        <a href="{{ route('role.index') }}" aria-expanded="true"><i class="ti-dashboard"></i><span>Role Management</span></a>
+                    </li>
+                    <li>
+                        <a href="{{ route('users.index') }}" aria-expanded="true"><i class="ti-dashboard"></i><span>User Management</span></a>
                     </li>
                 </ul>
             </nav>
