@@ -11,7 +11,9 @@
                     <div class="card-body">
                         <div class="clearfix">
                             <h4 class="header-title float-left">User List</h4>
-                            <a href="{{ route('users.create') }}" class="btn btn-success btn-sm float-right">Create User</a>
+                            @if (auth()->user()->can('user_create'))
+                                <a href="{{ route('users.create') }}" class="btn btn-success btn-sm float-right">Create User</a>
+                            @endif
                         </div>
                         <hr>
 
@@ -40,8 +42,12 @@
                                         @endforeach
                                     </td>
                                     <td>
-                                        <a href="{{ route('users.edit',$user->id) }}" class="btn btn-success btn-sm">Edit</a>
-                                        <a href="{{ route('users.delete',$user->id) }}" onclick="return confirm('Do you want to delete?')" class="btn btn-danger btn-sm">Delete</a>
+                                        @if (auth()->user()->can('user_edit'))
+                                            <a href="{{ route('users.edit',$user->id) }}" class="btn btn-success btn-sm">Edit</a>
+                                        @endif
+                                        @if (auth()->user()->can('user_delete'))
+                                           <a href="{{ route('users.delete',$user->id) }}" onclick="return confirm('Do you want to delete?')" class="btn btn-danger btn-sm">Delete</a>
+                                        @endif
                                     </td>
                                 </tr>
                                @endforeach

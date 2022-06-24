@@ -14,6 +14,10 @@ class UserController extends Controller
 
     public function index()
     {
+        if (!auth()->user()->can('user_view')) {
+            abort(403,"Access Denied!");
+        }
+
         $users = User::all();
         return view('pages.users.index',compact('users'));
     }
@@ -21,6 +25,9 @@ class UserController extends Controller
 
     public function create()
     {
+        if (!auth()->user()->can('user_create')) {
+            abort(403,"Access Denied!");
+        }
         $roles = Role::all();
         return view('pages.users.create',compact('roles'));
     }
@@ -88,6 +95,9 @@ class UserController extends Controller
 
     public function edit($id)
     {
+        if (!auth()->user()->can('user_edit')) {
+            abort(403,"Access Denied!");
+        }
         $roles = Role::all();
         $user = User::findOrFail($id);
         return view('pages.users.edit',compact('user','roles'));
@@ -96,6 +106,10 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
+
+        if (!auth()->user()->can('user_update')) {
+            abort(403,"Access Denied!");
+        }
 
         $rules = [
             'name'             => "required",
@@ -153,6 +167,10 @@ class UserController extends Controller
 
     public function destroy($id)
     {
+        if (!auth()->user()->can('user_delete')) {
+            abort(403,"Access Denied!");
+        }
+
         $user = User::findOrFail($id);
         $user->delete();
 
